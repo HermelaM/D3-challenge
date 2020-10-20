@@ -1,10 +1,10 @@
-var svgWidth = 980;
-var svgHeight = 600;
+var svgWidth = 800;
+var svgHeight = 500;
 
 var margin = {
-  top: 40,
+  top: 20,
   right: 40,
-  bottom: 60,
+  bottom: 80,
   left: 100
 };
 
@@ -123,43 +123,12 @@ d3.csv("assets/data/data.csv").then(data => {
   }
 
   
-  // var circlesGroup = chartGroup.selectAll(".stateCircle")
-  //     .data(acsData)
-  //     .enter()
-  //     .append("circle")
-  //     .attr("cx", d => xLinearScale(d[chosenXAxis]))
-  //     .attr("cy", d => yLinearScale(d[chosenYAxis]))
-  //     .attr("class", "stateCircle")
-  //     .attr("r", 15)
-  //     .attr("opacity", ".75");
-
-  //   // Append Text to Circles
-  //   var textGroup = chartGroup.selectAll(".stateText")
-  //     .data(acsData)
-  //     .enter()
-  //     .append("text")
-  //     .attr("x", d => xLinearScale(d[chosenXAxis]))
-  //     .attr("y", d => yLinearScale(d[chosenYAxis]*.98))
-  //     .text(d => (d.abbr))
-  //     .attr("class", "stateText")
-  //     .attr("font-size", "12px")
-  //     .attr("text-anchor", "middle")
-  //     .attr("fill", "white");
-
-
-
-    // ==============================
     // var toolTip = d3.tip()
     //   .attr("class", "tooltip")
     //   .offset([80, -60])
     //   .html(d => `${d.state}<br>Hair length: ${d.poverty}<br>Hits: ${d.obesity}`);
 
-    // Step 7: Create tooltip in the chart
-    // ==============================
-    //chartGroup.call(toolTip);
-
-    // Step 8: Create event listeners to display and hide the tooltip
-    // ==============================
+ 
     circlesGroup.on("click", function(data) {
       toolTip.show(data, this);
     })
@@ -171,14 +140,14 @@ d3.csv("assets/data/data.csv").then(data => {
     // Create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 40)
+      .attr("y", 0 - margin.left + 20)
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Number of Billboard 100 Hits");
+      .text("Obesity (%)");
 
     chartGroup.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
       .attr("class", "axisText")
-      .text("Hair Metal Band Hair Length (inches)");
+      .text("Poverty (%)");
   }).catch(error => console.log(error));
