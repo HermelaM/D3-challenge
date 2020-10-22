@@ -24,7 +24,7 @@ var chartGroup = svg.append("g")
 
   // Initial Params
 var chosenXAxis = "poverty";
-//var chosenYAxis = "obesity";
+var chosenYAxis = "obesity";
 
 // function used for updating x-scale var upon click on axis label
 function xScale(data, chosenXAxis) {
@@ -60,6 +60,18 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 
   return circlesGroup;
 }
+
+  // Function for Updating Text Group with a Transition to New Text
+  function renderText(textGroup,  newXScale, chosenXAxis) {
+  
+    textGroup.transition()
+      .duration(1000)
+      .attr("x", d => newXScale(d[chosenXAxis]))
+      //.attr("y", d => newYScale(d[chosenYAxis]))
+      .attr("text-anchor", "middle");
+
+    return textGroup;
+  }
 
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, circlesGroup) {
@@ -198,10 +210,10 @@ chartGroup.append("text")
        xAxis = renderAxes(xLinearScale, xAxis);
 
        // updates circles with new x values
-       circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale);
+       circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
 
         // Updates Text with New Values
-        textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale);
+        textGroup = renderText(textGroup, xLinearScale, chosenXAxis);
 
        // updates tooltips with new info
        circlesGroup = updateToolTip(chosenXAxis, circlesGroup, textGroup);
