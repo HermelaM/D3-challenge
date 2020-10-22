@@ -106,8 +106,8 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 // Import Data
 d3.csv("assets/data/data.csv").then(data => {
 
-    // Step 1: Parse Data/Cast as numbers
-    // ==============================
+    // Parse Data/Cast as numbers
+   
     data.forEach(data => {
       data.poverty = +data.poverty;
       data.obesity = +data.obesity;
@@ -150,48 +150,48 @@ d3.csv("assets/data/data.csv").then(data => {
     .attr("r", 20)
     .attr("opacity", "1");
 
-  // Append Text to Circles
-  var textGroup = chartGroup.selectAll(".stateText")
-    .data(data)
-    .enter()
-    .append("text")
-    .attr("x", d => xLinearScale(d[chosenXAxis]))
-    .attr("y", d => yLinearScale(d.obesity))
-    .text(d => (d.abbr))
-    .attr("class", "stateText")
-    .attr("font-size", "12px")
-    .attr("text-anchor", "middle")
-    .attr("fill", "white");
+    // Append Text to Circles
+    var textGroup = chartGroup.selectAll(".stateText")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("x", d => xLinearScale(d[chosenXAxis]))
+      .attr("y", d => yLinearScale(d.obesity))
+      .text(d => (d.abbr))
+      .attr("class", "stateText")
+      .attr("font-size", "12px")
+      .attr("text-anchor", "middle")
+      .attr("fill", "white");
 
-    // Create group for two x-axis labels
-  var labelsGroup = chartGroup.append("g")
-  .attr("transform", `translate(${width / 2}, ${height + 20})`);
+      // Create group for two x-axis labels
+    var labelsGroup = chartGroup.append("g")
+    .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
-var povertyLabel = labelsGroup.append("text")
-  .attr("x", 0)
-  .attr("y", 20)
-  .attr("value", "poverty") // value to grab for event listener
-  .classed("active", true)
-  .text("Poverty(%)");
+    var povertyLabel = labelsGroup.append("text")
+      .attr("x", 0)
+      .attr("y", 20)
+      .attr("value", "poverty") // value to grab for event listener
+      .classed("active", true)
+      .text("Poverty(%)");
 
-var incomeLabel = labelsGroup.append("text")
-  .attr("x", 0)
-  .attr("y", 40)
-  .attr("value", "income") // value to grab for event listener
-  .classed("inactive", true)
-  .text("Income");
+    var incomeLabel = labelsGroup.append("text")
+      .attr("x", 0)
+      .attr("y", 40)
+      .attr("value", "income") // value to grab for event listener
+      .classed("inactive", true)
+      .text("Income");
 
-// append y axis
-chartGroup.append("text")
-  .attr("transform", "rotate(-90)")
-  .attr("y", 0 - margin.left)
-  .attr("x", 0 - (height / 2))
-  .attr("dy", "1em")
-  .classed("axis-text", true)
-  .text("Obesity (%)");
+  // append y axis
+  chartGroup.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .classed("axis-text", true)
+    .text("Obesity (%)");
 
- // updateToolTip function above csv import
- var circlesGroup = updateToolTip(chosenXAxis, circlesGroup, textGroup);
+    // updateToolTip function above csv import
+    var circlesGroup = updateToolTip(chosenXAxis, circlesGroup, textGroup);
 
  // x axis labels event listener
  labelsGroup.selectAll("text")
