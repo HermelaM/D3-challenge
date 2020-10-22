@@ -179,7 +179,7 @@ chartGroup.append("text")
   .text("Obesity (%)");
 
  // updateToolTip function above csv import
- var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+ var circlesGroup = updateToolTip(chosenXAxis, circlesGroup, textGroup);
 
  // x axis labels event listener
  labelsGroup.selectAll("text")
@@ -191,9 +191,6 @@ chartGroup.append("text")
        // replaces chosenXAxis with value
        chosenXAxis = value;
 
-       // console.log(chosenXAxis)
-
-       // functions here found above csv import
        // updates x scale for new data
        xLinearScale = xScale(data, chosenXAxis);
 
@@ -201,13 +198,16 @@ chartGroup.append("text")
        xAxis = renderAxes(xLinearScale, xAxis);
 
        // updates circles with new x values
-       circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
+       circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale);
+
+        // Updates Text with New Values
+        textGroup = renderText(textGroup, xLinearScale, chosenXAxis, yLinearScale);
 
        // updates tooltips with new info
-       circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+       circlesGroup = updateToolTip(chosenXAxis, circlesGroup, textGroup);
 
        // changes classes to change bold text
-       if (chosenXAxis === "income") {
+       if (chosenXAxis === "poverty") {
         incomeLabel
            .classed("active", true)
            .classed("inactive", false);
